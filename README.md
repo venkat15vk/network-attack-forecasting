@@ -86,9 +86,19 @@ CSV.
 - 754 of 1,241 source IPs have ≥5 events and are usable for behavioral
   profiling.
 
-## Cite
+## Citing this work
 
-If you use this code please cite the paper above and the Loghub dataset:
+If you use this code, the results in `results/`, or build on the
+method described here, **please cite the paper**:
+
+    @article{gopalakrishnan2026forecasting,
+      title   = {Forecasting Per-Host Attack Volume from Short-Window Behavioral Features: A Study on Real SSH Server Logs},
+      author  = {Gopalakrishnan, Venkatakrishnan},
+      journal = {arXiv preprint [arXiv ID to be added after submission]},
+      year    = {2026}
+    }
+
+And the underlying dataset:
 
     @article{he2020loghub,
       title   = {Loghub: A Large Collection of System Log Datasets for AI-driven Log Analytics},
@@ -99,4 +109,7 @@ If you use this code please cite the paper above and the Loghub dataset:
 
 ## License
 
-MIT (see `LICENSE`).
+This code is released under the MIT License (see `LICENSE`). You are
+free to use, modify, and redistribute it for any purpose, including
+commercial use. Academic use should cite the paper above per the
+section "Citing this work".
