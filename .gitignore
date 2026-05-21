@@ -1,0 +1,35 @@
+# Data files — do not commit
+data/
+*.log
+*.tar.gz
+*.zip
+*.csv.zip
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# LaTeX intermediates (in case you store the paper here too later)
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+
+# But DO keep results logs (small text outputs we want versioned)
+!results/*.log

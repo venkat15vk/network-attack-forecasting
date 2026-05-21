@@ -1,0 +1,51 @@
+
+=== Patent 2 forecasting (fast) — lookback=5m, horizon=15m, bucket=1m ===
+
+Parsing log ...
+  -> 542,861 events, 1,241 IPs, span 2015-01-01 00:12:28+00:00 to 2015-12-31 23:56:30+00:00
+
+Building cells (streaming windowed aggregates, bucket=1m) ...
+    IP 52/1241  kept=2,573  seen=13,005,719  skipped_short=10
+    IP 122/1241  kept=6,276  seen=25,948,868  skipped_short=25
+    IP 189/1241  kept=12,286  seen=36,716,088  skipped_short=48
+    IP 404/1241  kept=13,586  seen=50,545,213  skipped_short=121
+    IP 1241/1241  kept=18,590  seen=52,813,509  skipped_short=487
+
+  Final: cells seen=52,813,511, kept=18,590, IPs used=754, IPs skipped (too short)=487
+  done in 23.2s; 18,590 cells
+  target_any rate: 26.3%
+  target_count: mean=23.21, median=0, max=1041, std=72.9
+
+Multi-split evaluation ...
+  train_frac=0.5
+  train_frac=0.6
+  train_frac=0.7
+  train_frac=0.8
+  train_frac=0.9
+
+======================================================================
+CLASSIFICATION (any attacky event in next horizon)
+======================================================================
+  RF[all]            AUC-PR=0.952±0.022  AUC-ROC=0.970±0.008  (n=5)
+  RF[agg]            AUC-PR=0.927±0.035  AUC-ROC=0.948±0.023  (n=5)
+  persist[>0]        AUC-PR=0.871±0.039  AUC-ROC=0.919±0.009  (n=5)
+  RF[outlier]        AUC-PR=0.742±0.124  AUC-ROC=0.880±0.049  (n=5)
+  mean_baseline      AUC-PR=0.409±0.115  AUC-ROC=0.500±0.000  (n=5)
+
+Paired t-tests (RF[all] vs each):
+  vs RF[agg]            wins=5/5  Δ=+0.0250  p=0.0294
+  vs persist[>0]        wins=5/5  Δ=+0.0805  p=0.0005
+  vs RF[outlier]        wins=5/5  Δ=+0.2093  p=0.0110
+  vs mean_baseline      wins=5/5  Δ=+0.5427  p=0.0002
+
+======================================================================
+REGRESSION (count of attacky events in next horizon)
+======================================================================
+  persist[×3]        MAE= 27.78±4.80  RMSE= 92.82±8.20  R²=-0.120±0.088  (n=5)
+  RF[all]            MAE= 28.94±8.79  RMSE= 72.76±14.17  R²=+0.244±0.432  (n=5)
+  RF[agg]            MAE= 35.64±25.64  RMSE=101.07±51.09  R²=-0.869±2.468  (n=5)
+  mean_baseline      MAE= 39.14±3.99  RMSE= 88.64±11.19  R²=-0.013±0.020  (n=5)
+  RF[outlier]        MAE= 43.74±4.01  RMSE= 94.90±9.03  R²=-0.182±0.203  (n=5)
+
+Wrote results/forecast_full.csv
+Total wall time: 57.6s
